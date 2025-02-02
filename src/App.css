@@ -1,0 +1,85 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.task-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.input-text {
+  width: 200px;
+  padding: 8px;
+  margin-left:  50px;
+  margin-right: 20px;
+
+}
+
+button {
+  /* Add any custom styles for the button here */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  justify-content: space-between; /* Aligns the task and icon on opposite sides */
+  align-items: center; /* Vertically centers the text and icon */
+}
+
+p {
+  display: inline;
+  cursor: pointer;
+  margin-left: 10px; /* Adds space between the task text and trash icon */
+}
+
+.fa-trash {
+  margin-left: 5px; /* You can adjust this value to add space between the icon and text */
+  cursor: pointer;
+}
+.fa-pen-to-square{
+  margin-left: 10px;
+  cursor: pointer;
+}
