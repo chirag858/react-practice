@@ -12,29 +12,25 @@ function App() {
   const taskOptions = ["All", "Completed", "Pending"];
   const [selected, setSelected] = useState("All");
   const [isOpen, setIsOpen] = useState(false);
-  // const handleDropdownTask = (option) => {
+  let [filteredTasks,setfilteredTasks] = useState([]);
 
   useEffect(() => {
     if (!selected) return;
-
     if (selected === "Pending") {
       let pendingTasks = tasks.filter(task => !task.isCompleted);
       console.log("Pending tasks:", pendingTasks);
-      setdropdowntasks(pendingTasks);
+      setfilteredTasks(pendingTasks)
     }
     else if (selected === "Completed") {
       let completedTasks = tasks.filter(task => task.isCompleted);
       console.log("Completed tasks:", completedTasks);
-      setdropdowntasks(completedTasks);
+      setfilteredTasks(completedTasks)
     }
     else {
-      setdropdowntasks(tasks);
+      setfilteredTasks(tasks);
     }
-  }, [selected,tasks]); // Ensure it runs when `tasks` change as well
+  }, [selected,tasks]); 
 
-
-
-  // }
   const handleAddOrEditTask = () => {
     if (inputValue.trim() === "") return;
 
@@ -44,40 +40,32 @@ function App() {
           index === editIndex ? { ...task, text: inputValue } : task
         )
       );
-      setdropdowntasks((prevTasks) =>
-        prevTasks.map((task, index) =>
-          index === editIndex ? { ...task, text: inputValue } : task
-        )
-      );
+
       setIsEdit(false);
     } else {
       setTasks((prevTasks) => [...prevTasks, { text: inputValue, isCompleted: false }]);
-      setdropdowntasks((prevTasks) => [...prevTasks, { text: inputValue, isCompleted: false }]);
+
     }
 
     setInputValue("");
   };
-  const filteredTasks = tasks.filter(task => 
-    selected === "Pending" ? !task.isCompleted 
-    : selected === "Completed" ? task.isCompleted 
-    : true
-  );
   
-  const handleDeleteTask = (index) => {
-    const taskToDelete = dropdowntasks[index];
-    setTasks((prevTasks) => prevTasks.filter(task => task !== taskToDelete));
+  const handleDeleteTask = (text) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.text !== text));
   };
-
+  
   const handleEditTask = (index) => {
     setInputValue(tasks[index].text);
     setIsEdit(true);
     setEditIndex(index);
   };
 
-  const handleToggleComplete = (index) => {
+  const handleToggleComplete = (text) => {
+    console.log(filteredTasks);
+    console.log(text);
     setTasks((prevTasks) =>
-      prevTasks.map((task, i) =>
-        i === index ? { ...task, isCompleted: !task.isCompleted } : task
+      prevTasks.map((task) =>
+        task.text === text ? { ...task, isCompleted: !task.isCompleted } : task
       )
     );
   };
@@ -120,11 +108,11 @@ function App() {
             <input
               type="checkbox"
               checked={task.isCompleted}
-              onChange={() => handleToggleComplete(index)}
+              onChange={() => handleToggleComplete(task.text)}
             />
             {task.text}
             <i
-              onClick={() => handleDeleteTask(index)}
+              onClick={() => handleDeleteTask(task.text)}
               className="fa-solid fa-trash"
               style={{ marginLeft: "10px", cursor: "pointer", color: "red" }}
             ></i>
