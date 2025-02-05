@@ -5,7 +5,6 @@ import './app.css';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [dropdowntasks, setdropdowntasks] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
