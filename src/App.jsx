@@ -10,7 +10,7 @@ function App() {
   const [isEdit, setIsEdit] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   const taskOptions = ["All", "Completed", "Pending"];
-  const [selected, setSelected] = useState("Select an option");
+  const [selected, setSelected] = useState("All");
   const [isOpen, setIsOpen] = useState(false);
   // const handleDropdownTask = (option) => {
 
@@ -30,7 +30,7 @@ function App() {
     else {
       setdropdowntasks(tasks);
     }
-  }, [selected]); // Ensure it runs when `tasks` change as well
+  }, [selected,tasks]); // Ensure it runs when `tasks` change as well
 
 
 
@@ -57,10 +57,15 @@ function App() {
 
     setInputValue("");
   };
-
+  const filteredTasks = tasks.filter(task => 
+    selected === "Pending" ? !task.isCompleted 
+    : selected === "Completed" ? task.isCompleted 
+    : true
+  );
+  
   const handleDeleteTask = (index) => {
-    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
-    setdropdowntasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
+    const taskToDelete = dropdowntasks[index];
+    setTasks((prevTasks) => prevTasks.filter(task => task !== taskToDelete));
   };
 
   const handleEditTask = (index) => {
@@ -71,11 +76,6 @@ function App() {
 
   const handleToggleComplete = (index) => {
     setTasks((prevTasks) =>
-      prevTasks.map((task, i) =>
-        i === index ? { ...task, isCompleted: !task.isCompleted } : task
-      )
-    );
-    setdropdowntasks((prevTasks) =>
       prevTasks.map((task, i) =>
         i === index ? { ...task, isCompleted: !task.isCompleted } : task
       )
@@ -115,7 +115,7 @@ function App() {
       </button>
 
       <ul>
-        {dropdowntasks.map((task, index) => (
+        {filteredTasks.map((task, index) => (
           <li key={index} style={{ textDecoration: task.isCompleted ? "line-through" : "none" }}>
             <input
               type="checkbox"
