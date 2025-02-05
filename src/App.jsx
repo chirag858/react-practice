@@ -32,7 +32,10 @@ function App() {
 
   const handleAddOrEditTask = () => {
     if (inputValue.trim() === "") return;
-
+    if (!isEdit && tasks.some(task => task.text === inputValue)) {
+      alert("Task already exists!");
+      return;
+    }
     if (isEdit) {
       setTasks((prevTasks) =>
         prevTasks.map((task, index) =>
@@ -53,9 +56,10 @@ function App() {
     setTasks((prevTasks) => prevTasks.filter((task) => task.text !== text));
   };
   
-  const handleEditTask = (index) => {
-    setInputValue(tasks[index].text);
+  const handleEditTask = (text) => {
+    setInputValue(text);
     setIsEdit(true);
+    const index = tasks.findIndex(item => item.text === text);
     setEditIndex(index);
   };
 
@@ -116,7 +120,7 @@ function App() {
               style={{ marginLeft: "10px", cursor: "pointer", color: "red" }}
             ></i>
             <i
-              onClick={() => handleEditTask(index)}
+              onClick={() => handleEditTask(task.text)}
               className="fa-solid fa-pen-to-square"
               style={{ marginLeft: "10px", cursor: "pointer", color: "blue" }}
             ></i>
