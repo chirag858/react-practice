@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import 'font-awesome/css/font-awesome.min.css';
 import './app.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import CalendarIcon from './Calender';
+
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -12,6 +16,7 @@ function App() {
   const [selected, setSelected] = useState("All");
   const [isOpen, setIsOpen] = useState(false);
   let [filteredTasks,setfilteredTasks] = useState([]);
+  const [value, onChange] = useState(new Date());
 
   useEffect(() => {
     if (!selected) return;
@@ -80,7 +85,7 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div style={{width : "800px"}}>
       <div className="dropdown">
         <button onClick={() => setIsOpen(!isOpen)}>{selected} ▼</button>
         {isOpen && (
@@ -104,6 +109,7 @@ function App() {
       <button onClick={handleAddOrEditTask}>
         {isEdit ? "Save Task" : "Add Task"}
       </button>
+      <CalendarIcon />
 
       <ul>
         {filteredTasks.map((task, index) => (
@@ -127,6 +133,7 @@ function App() {
           </li>
         ))}
       </ul>
+
     </div>
   );
 }
