@@ -80,7 +80,9 @@ p {
   margin-left: 10px;
   cursor: pointer;
 }
-
+button{
+  background: #ffe3ea;
+}
 
 .dropdown {
   position: relative;

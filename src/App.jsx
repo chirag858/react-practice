@@ -86,6 +86,8 @@ function App() {
 
   return (
     <div style={{width : "800px"}}>
+      <div style={{display:'flex',alignItems: 'center',justifyContent: 'space-between'}}>
+
       <div className="dropdown">
         <button onClick={() => setIsOpen(!isOpen)}>{selected} ▼</button>
         {isOpen && (
@@ -110,6 +112,7 @@ function App() {
         {isEdit ? "Save Task" : "Add Task"}
       </button>
       <CalendarIcon />
+      </div>
 
       <ul>
         {filteredTasks.map((task, index) => (

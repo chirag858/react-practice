@@ -17,7 +17,7 @@ const CalendarIcon = () => {
   };
 
   return (
-    <div>
+    <div style={{marginLeft : "20px"}}>
       {/* Icon to click */}
       <div onClick={handleIconClick} style={{ cursor: 'pointer' }}>
         📅 
