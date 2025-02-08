@@ -18,7 +18,7 @@ function NavbarItem({ Mode }) {
         Mode(mode);
     };
     return (
-        <Navbar bg="light" data-bs-theme="light">
+        <Navbar bg={mode} data-bs-theme={mode}>
             <Container>
                 <Navbar.Brand href="#Todo">Ten Ten</Navbar.Brand>
                 <Nav className="me-auto">
@@ -27,11 +27,10 @@ function NavbarItem({ Mode }) {
                     <Nav.Link href="#Notepad">Notepad</Nav.Link>
                 </Nav>
             </Container>
-            <Form>
+            <Form style={{paddingRight:'5px'}}>
                 <Form.Check
                     type="switch"
                     id="custom-switch"
-                    label="Dark Mode"
                     onChange={onModeChange}
                 />
             </Form>

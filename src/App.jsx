@@ -83,8 +83,9 @@ function App() {
   const handleDateSelect = (date) => {
     setSelectedDate(date);
   };
-  const handleModeChange = (mode) =>{
-    setmode(mode);
+  const handleModeChange = (modebg) =>{
+    setmode(modebg);
+    console.log(mode,modebg);
   }
 
 
