@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Default CSS
 import './app.css'; // Custom CSS for styling
 
-const CalendarIcon = () => {
+const CalendarIcon = ({ onDateSelect }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -13,7 +13,8 @@ const CalendarIcon = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setShowCalendar(false); // Close the calendar after selecting a date
+    setShowCalendar(false);
+    onDateSelect(date);
   };
 
   return (

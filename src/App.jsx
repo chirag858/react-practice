@@ -16,7 +16,7 @@ function App() {
   const [selected, setSelected] = useState("All");
   const [isOpen, setIsOpen] = useState(false);
   let [filteredTasks,setfilteredTasks] = useState([]);
-  const [value, onChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     if (!selected) return;
@@ -44,13 +44,13 @@ function App() {
     if (isEdit) {
       setTasks((prevTasks) =>
         prevTasks.map((task, index) =>
-          index === editIndex ? { ...task, text: inputValue } : task
+          index === editIndex ? { ...task, text: inputValue,dateToPerform : selectedDate } : task
         )
       );
 
       setIsEdit(false);
     } else {
-      setTasks((prevTasks) => [...prevTasks, { text: inputValue, isCompleted: false }]);
+      setTasks((prevTasks) => [...prevTasks, { text: inputValue, isCompleted: false,dateToPerform : selectedDate }]);
 
     }
 
@@ -83,6 +83,11 @@ function App() {
       handleAddOrEditTask();
     }
   };
+  const handleDateSelect = (date) => {
+    console.log("Date changed to :",date);
+    setSelectedDate(date);
+  };
+
 
   return (
     <div style={{width : "800px"}}>
@@ -111,7 +116,7 @@ function App() {
       <button onClick={handleAddOrEditTask}>
         {isEdit ? "Save Task" : "Add Task"}
       </button>
-      <CalendarIcon />
+      <CalendarIcon onDateSelect={handleDateSelect} />
       </div>
 
       <ul>
