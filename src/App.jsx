@@ -5,7 +5,7 @@ import './app.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CalendarIcon from './Calender';
-import NavbarItem from "../navbar";
+import NavbarItem from "./navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
