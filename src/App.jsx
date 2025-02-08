@@ -22,12 +22,10 @@ function App() {
     if (!selected) return;
     if (selected === "Pending") {
       let pendingTasks = tasks.filter(task => !task.isCompleted);
-      console.log("Pending tasks:", pendingTasks);
       setfilteredTasks(pendingTasks)
     }
     else if (selected === "Completed") {
       let completedTasks = tasks.filter(task => task.isCompleted);
-      console.log("Completed tasks:", completedTasks);
       setfilteredTasks(completedTasks)
     }
     else {
@@ -69,8 +67,6 @@ function App() {
   };
 
   const handleToggleComplete = (text) => {
-    console.log(filteredTasks);
-    console.log(text);
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.text === text ? { ...task, isCompleted: !task.isCompleted } : task
@@ -84,7 +80,6 @@ function App() {
     }
   };
   const handleDateSelect = (date) => {
-    console.log("Date changed to :",date);
     setSelectedDate(date);
   };
 
