@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 
 
 function NavbarItem({ Mode }) {
-    const [mode, setmode] = useState("dark");
+    const [mode, setmode] = useState("light");
     const onModeChange = (date) => {
         if (mode == "dark") {
             setmode("light");
@@ -27,13 +27,13 @@ function NavbarItem({ Mode }) {
                     <Nav.Link href="#Notepad">Notepad</Nav.Link>
                 </Nav>
             </Container>
-            <Form style={{paddingRight:'5px'}}>
+            {/* <Form style={{paddingRight:'5px'}}>
                 <Form.Check
                     type="switch"
                     id="custom-switch"
                     onChange={onModeChange}
                 />
-            </Form>
+            </Form> */}
         </Navbar>
     );
 }

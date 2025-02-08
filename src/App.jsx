@@ -6,6 +6,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CalendarIcon from './Calender';
 import NavbarItem from "../navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -18,6 +19,7 @@ function App() {
   let [filteredTasks,setfilteredTasks] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [mode, setmode] = useState("dark");
+  const [oppColor ,setoppColor] = useState("#00FFFF");
 
   useEffect(() => {
     if (!selected) return;
@@ -84,22 +86,32 @@ function App() {
     setSelectedDate(date);
   };
   const handleModeChange = (modebg) =>{
-    setmode(modebg);
-    console.log(mode,modebg);
+    if(modebg == "dark"){
+      setmode("white");
+      setoppColor("#00FFFF");
+
+      console.log(oppColor,"oppColor FFFFFF is white color");
+    }
+    else{
+      setmode("#202020");
+      setoppColor("#A0A0A0");
+      console.log(oppColor , "oppColor 393939 is dark color");
+    }
+
   }
 
 
   return (
     <div>
       <NavbarItem Mode={handleModeChange} />
-      <div style={{display:'flex',alignItems: 'center',justifyContent: 'space-between'}}>
+      <div style={{display:'flex',alignItems: 'center',justifyContent: 'space-between' , backgroundColor : mode}}>
 
       <div className="dropdown">
-        <button onClick={() => setIsOpen(!isOpen)}>{selected} ▼</button>
+        <button onClick={() => setIsOpen(!isOpen)}>{selected}</button>
         {isOpen && (
-          <ul>
+          <ul style={{backgroundColor : mode , color : mode}}>
             {taskOptions.map((option, index) => (
-              <li key={index} onClick={() => { setSelected(option); setIsOpen(false); }}>
+              <li key={index} onClick={() => { setSelected(option); setIsOpen(false); }} style={{backgroundColor : mode , color : mode}}>
                 {option}
               </li>
             ))}
@@ -122,7 +134,7 @@ function App() {
 
       <ul>
         {filteredTasks.map((task, index) => (
-          <li key={index} style={{ textDecoration: task.isCompleted ? "line-through" : "none" }}>
+          <li key={index} style={{ textDecoration: task.isCompleted ? "line-through" : "none",backgroundColor : mode , color : mode}}>
             <input
               type="checkbox"
               checked={task.isCompleted}
