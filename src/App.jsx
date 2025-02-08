@@ -5,7 +5,7 @@ import './app.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CalendarIcon from './Calender';
-
+import NavbarItem from "../navbar";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -17,6 +17,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   let [filteredTasks,setfilteredTasks] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [mode, setmode] = useState("dark");
 
   useEffect(() => {
     if (!selected) return;
@@ -82,10 +83,14 @@ function App() {
   const handleDateSelect = (date) => {
     setSelectedDate(date);
   };
+  const handleModeChange = (mode) =>{
+    setmode(mode);
+  }
 
 
   return (
-    <div style={{width : "800px"}}>
+    <div>
+      <NavbarItem Mode={handleModeChange} />
       <div style={{display:'flex',alignItems: 'center',justifyContent: 'space-between'}}>
 
       <div className="dropdown">
